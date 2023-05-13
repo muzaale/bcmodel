@@ -383,7 +383,19 @@ document.write(`
 </ul>
 <section id="ds4ph">
 <h2>ds4ph<a class="headerlink" href="#ds4ph" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://raw.githubusercontent.com/bcaffo/ds4bme_intro/master/data/kirby127a_3_1_ax_283Labels_M2_corrected_stats.csv">https://raw.githubusercontent.com/bcaffo/ds4bme_intro/master/data/kirby127a_3_1_ax_283Labels_M2_corrected_stats.csv</a></p>
+<p>Why do I need to jump through the extra hoops to get <a class="reference external" href="https://smart-stats.github.io/ds4bio_book/book/_build/html/data_cleaning.html">this</a> to work on my machine?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>import requests
+import pandas<span class="k"> as</span> pd
+import io 
+
+url = <span class="s">&quot;https://raw.githubusercontent.com/bcaffo/ds4bme_intro/master/data/kirby127a_3_1_ax_283Labels_M2_corrected_stats.csv&quot;</span>
+
+response = requests<span class="m">.</span><span class="nf">get</span>(url)
+content = response<span class="m">.</span>content<span class="m">.</span>decode(&#39;utf<span class="m">-8</span>&#39;)
+
+df = pd<span class="m">.</span>read_csv(io<span class="m">.</span>StringIO(content))
+</pre></div>
+</div>
 </section>
 </section>
 
