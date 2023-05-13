@@ -1,11 +1,6 @@
-# Welcome to your Jupyter Book
+# ds4ph
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
-
-Check out the content pages bundled with this sample book to see more.
+These are [my](https://jh.zoom.us/j/4109553504?pwd=amdidU82QTc2QTRmdkpDSkd3RU5pZz09#success) [class](https://smart-stats.github.io/ds4bio_book/book/_build/html/intro.html) [notes](https://smart-stats.github.io/advanced_ds4bio_book/qbook/_book/index.html)
 
 ```{tableofcontents}
 ```
