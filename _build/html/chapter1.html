@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>workflow &#8212; Trainee001</title>
+    <title>requests &#8212; Trainee001</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="rengineer" href="chapter2.html" />
-    <link rel="prev" title="ds4ph" href="intro.html" />
+    <link rel="next" title="io" href="chapter2.html" />
+    <link rel="prev" title="import" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,15 +152,20 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    ds4ph
+                    import
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter2.html">rengineer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter3.html">training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter4.html">bcmodel</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">get</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter6.html">decode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7.html">utf-8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter8.html">pd.read_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter9.html">io.StringIO(content)</a></li>
 </ul>
 
     </div>
@@ -342,7 +347,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>workflow</h1>
+    <h1>requests</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -356,13 +361,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="workflow">
-<h1>workflow<a class="headerlink" href="#workflow" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="requests">
+<h1>requests<a class="headerlink" href="#requests" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>0g.κοσμογονία,γ/3.dna.origins/.git</p></li>
 <li><p>vscode -&gt; terminal</p></li>
 <li><p><a class="reference external" href="https://muzaale.github.io/">https://muzaale.github.io/</a></p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span>
+<span class="o">~/</span><span class="n">dropbox</span><span class="o">/</span><span class="mi">0</span><span class="n">g</span><span class="o">.</span><span class="n">κοσμογονία</span><span class="p">,</span><span class="n">γ</span><span class="o">/</span><span class="mf">2.</span><span class="n">pantheon</span>
+<span class="n">cp</span> <span class="n">python</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">chapter7</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="n">nano</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">_toc</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span>
+<span class="n">mv</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">python</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">chapter6</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="n">cp</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">chapter6</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">../</span><span class="mf">3.</span><span class="n">dna</span><span class="o">.</span><span class="n">origins</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">chapter9</span><span class="o">.</span><span class="n">ipynb</span>
+
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -402,7 +417,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ds4ph</p>
+        <p class="prev-next-title">import</p>
       </div>
     </a>
     <a class="right-next"
@@ -410,7 +425,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">rengineer</p>
+        <p class="prev-next-title">io</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
