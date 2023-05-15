@@ -394,12 +394,8 @@ document.write(`
 
 <span class="c1">## vscode ide demands these, jupyter lab not</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/bcaffo/ds4bme_intro/master/data/oasis.csv&quot;</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1">#another vscode thing</span>
-
-<span class="c1">## Read in the data and display a few rows</span>
-<span class="n">dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="n">dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)))</span>
 <span class="n">dat</span> 
 </pre></div>
 </div>
@@ -668,7 +664,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-3.6901407431043736, 2.3236534424749173]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-3.090154817778018, 1.9325705284035544]
 </pre></div>
 </div>
 </div>
@@ -694,7 +690,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;FLAIR&#39;, ylabel=&#39;GOLD_Lesions&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/a083b52f33c8edf814526a1f99ca9bdd0f57d1aeb9655d8f722e08dde2340257.png" src="_images/a083b52f33c8edf814526a1f99ca9bdd0f57d1aeb9655d8f722e08dde2340257.png" />
+<img alt="_images/8d277b5059bb59106686b45fc711695485180af925481faff28c698bdc1cc17e.png" src="_images/8d277b5059bb59106686b45fc711695485180af925481faff28c698bdc1cc17e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -713,7 +709,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.615, 0.615, 0.615])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.667, 0.462, 0.824])
 </pre></div>
 </div>
 </div>
@@ -741,7 +737,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1e53dd5c34acf5d5988cf7de3d95e04f7dfe9d0c853e9d72cb4e2d46ec727bef.png" src="_images/1e53dd5c34acf5d5988cf7de3d95e04f7dfe9d0c853e9d72cb4e2d46ec727bef.png" />
+<img alt="_images/c4929312b670a977c8d502d51d0b478d505f389559953841629337bdfd2b679c.png" src="_images/c4929312b670a977c8d502d51d0b478d505f389559953841629337bdfd2b679c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -994,29 +990,29 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 Results: Ordinary least squares
 =================================================================
-Model:              OLS              Adj. R-squared:     0.731   
-Dependent Variable: PD               AIC:                67.3386 
-Date:               2023-05-14 21:48 BIC:                86.0890 
-No. Observations:   77               Log-Likelihood:     -25.669 
-Df Model:           7                F-statistic:        30.50   
-Df Residuals:       69               Prob (F-statistic): 9.14e-19
-R-squared:          0.756            Scale:              0.12727 
+Model:              OLS              Adj. R-squared:     0.768   
+Dependent Variable: PD               AIC:                65.3216 
+Date:               2023-05-14 22:48 BIC:                83.8615 
+No. Observations:   75               Log-Likelihood:     -24.661 
+Df Model:           7                F-statistic:        36.02   
+Df Residuals:       67               Prob (F-statistic): 2.45e-20
+R-squared:          0.790            Scale:              0.12651 
 ------------------------------------------------------------------
                Coef.   Std.Err.     t     P&gt;|t|    [0.025   0.975]
 ------------------------------------------------------------------
-Intercept      0.2135    0.1353   1.5776  0.1192  -0.0565   0.4835
-FLAIR         -0.0115    0.0864  -0.1330  0.8946  -0.1839   0.1609
-T1            -0.1932    0.0851  -2.2714  0.0262  -0.3629  -0.0235
-T2             0.6006    0.0870   6.9001  0.0000   0.4269   0.7742
-FLAIR_10      -0.1179    0.3173  -0.3716  0.7114  -0.7509   0.5151
-T1_10          0.2591    0.1550   1.6718  0.0991  -0.0501   0.5684
-T2_10          0.2108    0.2978   0.7077  0.4815  -0.3834   0.8050
-FLAIR_20       1.4177    0.7052   2.0104  0.0483   0.0109   2.8245
+Intercept      0.1708    0.1357   1.2587  0.2125  -0.1000   0.4416
+FLAIR          0.0168    0.0841   0.2002  0.8419  -0.1510   0.1847
+T1            -0.2508    0.0888  -2.8250  0.0062  -0.4281  -0.0736
+T2             0.6132    0.0868   7.0671  0.0000   0.4400   0.7863
+FLAIR_10      -0.1345    0.3305  -0.4069  0.6854  -0.7941   0.5252
+T1_10          0.1611    0.1739   0.9263  0.3576  -0.1861   0.5083
+T2_10          0.0542    0.2788   0.1944  0.8465  -0.5024   0.6108
+FLAIR_20       1.6052    0.7049   2.2771  0.0260   0.1982   3.0122
 -----------------------------------------------------------------
-Omnibus:               4.846        Durbin-Watson:          2.104
-Prob(Omnibus):         0.089        Jarque-Bera (JB):       4.221
-Skew:                  -0.413       Prob(JB):               0.121
-Kurtosis:              3.796        Condition No.:          40   
+Omnibus:               4.741        Durbin-Watson:          1.937
+Prob(Omnibus):         0.093        Jarque-Bera (JB):       5.140
+Skew:                  -0.249       Prob(JB):               0.077
+Kurtosis:              4.182        Condition No.:          41   
 =================================================================
 Notes:
 [1] Standard Errors assume that the covariance matrix of the
@@ -1048,8 +1044,8 @@ errors is correctly specified.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 0.212742
-         Iterations 9
+         Current function value: 0.247553
+         Iterations 8
 </pre></div>
 </div>
 </div>
@@ -1064,25 +1060,25 @@ errors is correctly specified.
 <div class="output text_html"><table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>GOLD_Lesions</td>   <th>  No. Observations:  </th>  <td>    77</td>  
+  <th>Dep. Variable:</th>     <td>GOLD_Lesions</td>   <th>  No. Observations:  </th>  <td>    75</td>  
 </tr>
 <tr>
-  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    69</td>  
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    67</td>  
 </tr>
 <tr>
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     7</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Sun, 14 May 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.6930</td>  
+  <th>Date:</th>            <td>Sun, 14 May 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.6428</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:48:59</td>     <th>  Log-Likelihood:    </th> <td> -16.381</td> 
+  <th>Time:</th>                <td>22:48:38</td>     <th>  Log-Likelihood:    </th> <td> -18.566</td> 
 </tr>
 <tr>
-  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -53.366</td> 
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -51.979</td> 
 </tr>
 <tr>
-  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>2.321e-13</td>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>6.455e-12</td>
 </tr>
 </table>
 <table class="simpletable">
@@ -1090,28 +1086,28 @@ errors is correctly specified.
       <td></td>        <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>const</th>    <td>   -4.8475</td> <td>    1.943</td> <td>   -2.494</td> <td> 0.013</td> <td>   -8.656</td> <td>   -1.039</td>
+  <th>const</th>    <td>   -3.6590</td> <td>    1.857</td> <td>   -1.970</td> <td> 0.049</td> <td>   -7.299</td> <td>   -0.019</td>
 </tr>
 <tr>
-  <th>FLAIR</th>    <td>    2.3827</td> <td>    1.249</td> <td>    1.908</td> <td> 0.056</td> <td>   -0.066</td> <td>    4.831</td>
+  <th>FLAIR</th>    <td>    1.5412</td> <td>    1.210</td> <td>    1.273</td> <td> 0.203</td> <td>   -0.831</td> <td>    3.913</td>
 </tr>
 <tr>
-  <th>T1</th>       <td>    3.3436</td> <td>    1.311</td> <td>    2.550</td> <td> 0.011</td> <td>    0.774</td> <td>    5.913</td>
+  <th>T1</th>       <td>    3.2125</td> <td>    1.293</td> <td>    2.484</td> <td> 0.013</td> <td>    0.677</td> <td>    5.747</td>
 </tr>
 <tr>
-  <th>T2</th>       <td>    2.6150</td> <td>    1.347</td> <td>    1.942</td> <td> 0.052</td> <td>   -0.024</td> <td>    5.254</td>
+  <th>T2</th>       <td>    2.6557</td> <td>    1.256</td> <td>    2.114</td> <td> 0.034</td> <td>    0.194</td> <td>    5.117</td>
 </tr>
 <tr>
-  <th>FLAIR_10</th> <td>   10.4060</td> <td>    4.365</td> <td>    2.384</td> <td> 0.017</td> <td>    1.851</td> <td>   18.961</td>
+  <th>FLAIR_10</th> <td>    8.2040</td> <td>    3.814</td> <td>    2.151</td> <td> 0.031</td> <td>    0.728</td> <td>   15.680</td>
 </tr>
 <tr>
-  <th>T1_10</th>    <td>    0.5536</td> <td>    1.844</td> <td>    0.300</td> <td> 0.764</td> <td>   -3.060</td> <td>    4.167</td>
+  <th>T1_10</th>    <td>    0.3250</td> <td>    2.149</td> <td>    0.151</td> <td> 0.880</td> <td>   -3.887</td> <td>    4.537</td>
 </tr>
 <tr>
-  <th>T2_10</th>    <td>   -5.8979</td> <td>    3.722</td> <td>   -1.584</td> <td> 0.113</td> <td>  -13.194</td> <td>    1.398</td>
+  <th>T2_10</th>    <td>   -7.3201</td> <td>    3.679</td> <td>   -1.990</td> <td> 0.047</td> <td>  -14.530</td> <td>   -0.110</td>
 </tr>
 <tr>
-  <th>FLAIR_20</th> <td>  -25.5693</td> <td>   10.257</td> <td>   -2.493</td> <td> 0.013</td> <td>  -45.673</td> <td>   -5.466</td>
+  <th>FLAIR_20</th> <td>  -14.8760</td> <td>    8.575</td> <td>   -1.735</td> <td> 0.083</td> <td>  -31.682</td> <td>    1.930</td>
 </tr>
 </table></div></div>
 </div>
@@ -1139,7 +1135,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3cbf52eebd4bab129e85968e9ddf1047f24816f787c4699f5f2df22cc7b74d1e.png" src="_images/3cbf52eebd4bab129e85968e9ddf1047f24816f787c4699f5f2df22cc7b74d1e.png" />
+<img alt="_images/6b22b7612c5bff66b2b5d1df95f1f216f440a6b8981e16bdc636899b79db098c.png" src="_images/6b22b7612c5bff66b2b5d1df95f1f216f440a6b8981e16bdc636899b79db098c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1151,32 +1147,32 @@ errors is correctly specified.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 0.212742
-         Iterations 9
+         Current function value: 0.247553
+         Iterations 8
 </pre></div>
 </div>
 <div class="output text_html"><table class="simpletable">
 <caption>Logit Regression Results</caption>
 <tr>
-  <th>Dep. Variable:</th>     <td>GOLD_Lesions</td>   <th>  No. Observations:  </th>  <td>    77</td>  
+  <th>Dep. Variable:</th>     <td>GOLD_Lesions</td>   <th>  No. Observations:  </th>  <td>    75</td>  
 </tr>
 <tr>
-  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    69</td>  
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    67</td>  
 </tr>
 <tr>
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     7</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Sun, 14 May 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.6930</td>  
+  <th>Date:</th>            <td>Sun, 14 May 2023</td> <th>  Pseudo R-squ.:     </th>  <td>0.6428</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:49:00</td>     <th>  Log-Likelihood:    </th> <td> -16.381</td> 
+  <th>Time:</th>                <td>22:48:39</td>     <th>  Log-Likelihood:    </th> <td> -18.566</td> 
 </tr>
 <tr>
-  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -53.366</td> 
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -51.979</td> 
 </tr>
 <tr>
-  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>2.321e-13</td>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>6.455e-12</td>
 </tr>
 </table>
 <table class="simpletable">
@@ -1184,28 +1180,28 @@ errors is correctly specified.
       <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
 </tr>
 <tr>
-  <th>Intercept</th> <td>   -4.8475</td> <td>    1.943</td> <td>   -2.494</td> <td> 0.013</td> <td>   -8.656</td> <td>   -1.039</td>
+  <th>Intercept</th> <td>   -3.6590</td> <td>    1.857</td> <td>   -1.970</td> <td> 0.049</td> <td>   -7.299</td> <td>   -0.019</td>
 </tr>
 <tr>
-  <th>FLAIR</th>     <td>    2.3827</td> <td>    1.249</td> <td>    1.908</td> <td> 0.056</td> <td>   -0.066</td> <td>    4.831</td>
+  <th>FLAIR</th>     <td>    1.5412</td> <td>    1.210</td> <td>    1.273</td> <td> 0.203</td> <td>   -0.831</td> <td>    3.913</td>
 </tr>
 <tr>
-  <th>T1</th>        <td>    3.3436</td> <td>    1.311</td> <td>    2.550</td> <td> 0.011</td> <td>    0.774</td> <td>    5.913</td>
+  <th>T1</th>        <td>    3.2125</td> <td>    1.293</td> <td>    2.484</td> <td> 0.013</td> <td>    0.677</td> <td>    5.747</td>
 </tr>
 <tr>
-  <th>T2</th>        <td>    2.6150</td> <td>    1.347</td> <td>    1.942</td> <td> 0.052</td> <td>   -0.024</td> <td>    5.254</td>
+  <th>T2</th>        <td>    2.6557</td> <td>    1.256</td> <td>    2.114</td> <td> 0.034</td> <td>    0.194</td> <td>    5.117</td>
 </tr>
 <tr>
-  <th>FLAIR_10</th>  <td>   10.4060</td> <td>    4.365</td> <td>    2.384</td> <td> 0.017</td> <td>    1.851</td> <td>   18.961</td>
+  <th>FLAIR_10</th>  <td>    8.2040</td> <td>    3.814</td> <td>    2.151</td> <td> 0.031</td> <td>    0.728</td> <td>   15.680</td>
 </tr>
 <tr>
-  <th>T1_10</th>     <td>    0.5536</td> <td>    1.844</td> <td>    0.300</td> <td> 0.764</td> <td>   -3.060</td> <td>    4.167</td>
+  <th>T1_10</th>     <td>    0.3250</td> <td>    2.149</td> <td>    0.151</td> <td> 0.880</td> <td>   -3.887</td> <td>    4.537</td>
 </tr>
 <tr>
-  <th>T2_10</th>     <td>   -5.8979</td> <td>    3.722</td> <td>   -1.584</td> <td> 0.113</td> <td>  -13.194</td> <td>    1.398</td>
+  <th>T2_10</th>     <td>   -7.3201</td> <td>    3.679</td> <td>   -1.990</td> <td> 0.047</td> <td>  -14.530</td> <td>   -0.110</td>
 </tr>
 <tr>
-  <th>FLAIR_20</th>  <td>  -25.5693</td> <td>   10.257</td> <td>   -2.493</td> <td> 0.013</td> <td>  -45.673</td> <td>   -5.466</td>
+  <th>FLAIR_20</th>  <td>  -14.8760</td> <td>    8.575</td> <td>   -1.735</td> <td> 0.083</td> <td>  -31.682</td> <td>    1.930</td>
 </tr>
 </table></div></div>
 </div>
@@ -1221,7 +1217,7 @@ errors is correctly specified.
 =================================================================
 Model:              OLS              Adj. R-squared:     0.743   
 Dependent Variable: PD               AIC:                95.4183 
-Date:               2023-05-14 21:49 BIC:                116.2597
+Date:               2023-05-14 22:48 BIC:                116.2597
 No. Observations:   100              Log-Likelihood:     -39.709 
 Df Model:           7                F-statistic:        41.98   
 Df Residuals:       92               Prob (F-statistic): 5.56e-26
@@ -1268,7 +1264,7 @@ errors is correctly specified.
 ================================================================
 Model:              OLS              Adj. R-squared:     -0.010 
 Dependent Variable: PD_adjusted      AIC:                83.4183
-Date:               2023-05-14 21:49 BIC:                88.6286
+Date:               2023-05-14 22:48 BIC:                88.6286
 No. Observations:   100              Log-Likelihood:     -39.709
 Df Model:           1                F-statistic:        0.04730
 Df Residuals:       98               Prob (F-statistic): 0.828  
@@ -1427,7 +1423,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14dada310&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14eddd790&gt;]
 </pre></div>
 </div>
 <img alt="_images/56ccb8dccf9e5c4e6e945df4334e20942292894365a49346bdeaaf30d7163498.png" src="_images/56ccb8dccf9e5c4e6e945df4334e20942292894365a49346bdeaaf30d7163498.png" />
@@ -1443,7 +1439,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14db25290&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14ee73990&gt;]
 </pre></div>
 </div>
 <img alt="_images/d47d480273d831c032b0a6e3925c7c1c436ade569019590b3c13cfe811fb33f9.png" src="_images/d47d480273d831c032b0a6e3925c7c1c436ade569019590b3c13cfe811fb33f9.png" />
@@ -1513,7 +1509,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/154131c51e22c7c7b75b92b465fd379327071ab198817f5af22d5fd6266ec578.png" src="_images/154131c51e22c7c7b75b92b465fd379327071ab198817f5af22d5fd6266ec578.png" />
+<img alt="_images/3f1bd89637d59022a32fec11e74a809a7fcabafeafb8b4e8ad815678178c6afe.png" src="_images/3f1bd89637d59022a32fec11e74a809a7fcabafeafb8b4e8ad815678178c6afe.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1523,7 +1519,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e2d84c11c7dfc3de419e0bd7b4d190b8ecf681f7a153b24745fd90dadf591d7.png" src="_images/4e2d84c11c7dfc3de419e0bd7b4d190b8ecf681f7a153b24745fd90dadf591d7.png" />
+<img alt="_images/c4cec02ba47d8edf89080a3c9bcc1a5aca28eac414725db67eac18da5176382a.png" src="_images/c4cec02ba47d8edf89080a3c9bcc1a5aca28eac414725db67eac18da5176382a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1533,7 +1529,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/aab62f07970315467205bf329c4d1537e161acf7a942e513e6882b9059ad342f.png" src="_images/aab62f07970315467205bf329c4d1537e161acf7a942e513e6882b9059ad342f.png" />
+<img alt="_images/f24a665abc3cc5117d76ff0374f31fb989c116b2b3731bb2911e76647f1e80af.png" src="_images/f24a665abc3cc5117d76ff0374f31fb989c116b2b3731bb2911e76647f1e80af.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1543,7 +1539,7 @@ errors is correctly specified.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b38a2f77f88f1842b3a5cfdf715d1fed41e39524a4229c52949e337910e2fb1c.png" src="_images/b38a2f77f88f1842b3a5cfdf715d1fed41e39524a4229c52949e337910e2fb1c.png" />
+<img alt="_images/a6de95720f087ce686cb176ef6c0f6047da527e2e269ff7be9505140f10923c3.png" src="_images/a6de95720f087ce686cb176ef6c0f6047da527e2e269ff7be9505140f10923c3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1861,6 +1857,210 @@ errors is correctly specified.
 </table>
 <p>5 rows × 1147 columns</p>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Get Italy, drop everyrthing except dates, convert to long (unstack converts to tuple)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">dat</span><span class="p">[</span><span class="n">dat</span><span class="p">[</span><span class="s1">&#39;Country/Region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Italy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Province/State&quot;</span><span class="p">,</span> <span class="s2">&quot;Country/Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Lat&quot;</span><span class="p">,</span> <span class="s2">&quot;Long&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="c1">## convert from tuple to array</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  
+<span class="c1">## get case counts instead of cumulative counts</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="c1">## get the first non zero entry</span>
+<span class="n">y</span> <span class="o">=</span>  <span class="n">y</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">!=</span>  <span class="mi">0</span><span class="p">))</span> <span class="p">:</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x150fdf550&gt;]
+</pre></div>
+</div>
+<img alt="_images/d77dfbd9cff334780fd81a3ed53fe380523945936e8516ef2c8347558de74429.png" src="_images/d77dfbd9cff334780fd81a3ed53fe380523945936e8516ef2c8347558de74429.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.nonparametric.smoothers_lowess</span> <span class="kn">import</span> <span class="n">lowess</span> <span class="c1">#from chatGPT</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">size</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#lowess = sm.nonparametric.lowess #chatGPT yet again!</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">lowess</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span><span class="n">return_sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x151014850&gt;]
+</pre></div>
+</div>
+<img alt="_images/b36c8d080aade3aed2259775522cadf85df27d5caa080484c4af7f04bafc45ec.png" src="_images/b36c8d080aade3aed2259775522cadf85df27d5caa080484c4af7f04bafc45ec.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## We&#39;re interested in the residual</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x150fe4950&gt;]
+</pre></div>
+</div>
+<img alt="_images/a81a8d24391241fefd11d1d70c5bb6ee02d48c7574c5f0a28169f94e951d188d.png" src="_images/a81a8d24391241fefd11d1d70c5bb6ee02d48c7574c5f0a28169f94e951d188d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create 4 elements</span>
+<span class="c1">## Orthonormal basis (note dividing by sqrt(n/2) makes them norm 1)</span>
+<span class="n">c5</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">n</span>  <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c20</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">/</span> <span class="n">n</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s5</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">5</span>  <span class="o">/</span> <span class="n">n</span>  <span class="p">)</span><span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s20</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">/</span> <span class="n">n</span>  <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c20</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7d296078b6b2614b4c0efd7517c8a46fe867a3ad8014da74ee5c024b93209536.png" src="_images/7d296078b6b2614b4c0efd7517c8a46fe867a3ad8014da74ee5c024b93209536.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Verify that they are orthonormal mean 0, round to 6 decimal places</span>
+<span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span> <span class="p">[</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s5</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">c5</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c20</span> <span class="o">*</span> <span class="n">c20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s5</span> <span class="o">*</span> <span class="n">s5</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s20</span> <span class="o">*</span> <span class="n">s20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">s5</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">s20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">c20</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s5</span> <span class="o">*</span> <span class="n">s20</span><span class="p">),</span>
+<span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.,  0.,  0., -0.,  1.,  1.,  1.,  1.,  0.,  0., -0., -0.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> 
+<span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x151274950&gt;]
+</pre></div>
+</div>
+<img alt="_images/46495eb91fe7920281a921a2a329534c4a25e373ee768c511fd9db04634bbe87.png" src="_images/46495eb91fe7920281a921a2a329534c4a25e373ee768c511fd9db04634bbe87.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c20</span> <span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s5</span> <span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+ <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s20</span> <span class="o">*</span> <span class="n">e</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-42402.1653977664, -961069.7936856844, 62406.76098672958, 1902286.8621751775]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+
+<span class="n">sreg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">c5</span><span class="p">,</span> <span class="n">c20</span><span class="p">,</span> <span class="n">s5</span><span class="p">,</span> <span class="n">s20</span><span class="p">]</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">sreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">fit</span><span class="o">.</span><span class="n">coef_</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1222376.2412703 , -1286448.11961955, -4881386.48874237,
+        1827887.03044428])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">c5</span><span class="p">,</span> <span class="n">s5</span><span class="p">]</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">sreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">fit</span><span class="o">.</span><span class="n">coef_</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1222376.2412703 , -4881386.48874237])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c5</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-5</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">test</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">real</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(array([], dtype=int64),),
+ array([], dtype=float64),
+ array([], dtype=float64),
+ 0.004409171075837742]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">imag</span><span class="p">[</span><span class="n">test</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([], dtype=float64)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 
