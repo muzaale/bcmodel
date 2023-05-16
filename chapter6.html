@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Background &#8212; Trainee001</title>
+    <title>StringIO &#8212; Trainee001</title>
   
   
   
@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter6';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Background" href="chapter7.html" />
+    <link rel="next" title="get(url)" href="chapter7.html" />
     <link rel="prev" title="content" href="chapter5.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -162,9 +162,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chapter3.html">requests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter4.html">tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter5.html">content</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Background</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">StringIO</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="chapter7.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7.html">get(url)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="chapter8.html">content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter9.html">decode(‘utf-8’)</a></li>
@@ -351,7 +351,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Background</h1>
+    <h1>StringIO</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -361,7 +361,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Background</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">StringIO</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#app">app</a></li>
 </ul>
 
@@ -375,29 +375,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h1>
-<p>I performed some basic survival analysis in Stata and shared the log file with ChatGPT. My request? Reproduce it in Python. And here is the response:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">//yours truly</span>
-<span class="k">capture log close</span> 
-<span class="k">log</span> using stata2py<span class="m">.</span>log,replace 
-import delimited <span class="s">&quot;ds4ph.capstone.csv&quot;</span>,<span class="k"> clear</span>
-<span class="k">describe</span>
-<span class="k">g</span> years=permth_int<span class="o">/</span><span class="m">12</span>
-<span class="k">g</span> died=mortstat<span class="o">==</span><span class="s">&quot;Assumed deceased&quot;</span>
-<span class="k">stset</span> years,fail(died)
-<span class="k">sts graph</span>, fail
-<span class="k">encode</span> race,<span class="k"> gen</span>(racecat)
-<span class="k">stcox</span> age female i<span class="m">.</span>racecat dm htn acr hba1c egfr sbp 
-<span class="k">log close</span> 
-</pre></div>
-</div>
-<p>Some great <a class="reference external" href="https://www.danielmsullivan.com/pages/tutorial_stata_to_python.html">Stata-to-Python</a> code</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="stringio">
+<h1>StringIO<a class="headerlink" href="#stringio" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">lifelines</span> <span class="kn">import</span> <span class="n">KaplanMeierFitter</span>
 <span class="kn">from</span> <span class="nn">lifelines</span> <span class="kn">import</span> <span class="n">CoxPHFitter</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Import the CSV file</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ds4ph.capstone.csv&#39;</span><span class="p">)</span>
@@ -412,8 +397,13 @@ import delimited <span class="s">&quot;ds4ph.capstone.csv&quot;</span>,<span cla
 <span class="c1"># Fit the Kaplan-Meier estimator</span>
 <span class="n">kmf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">time_column</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">event_column</span><span class="p">])</span>
 
-<span class="c1"># Plot the survival curves</span>
-<span class="n">kmf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="c1"># Plot the cumulative incidence (1 - KM)</span>
+<span class="n">cumulative_incidence</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span>
+<span class="n">cumulative_incidence</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative Incidence&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Incidence Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Perform Cox regression</span>
 <span class="n">cph</span> <span class="o">=</span> <span class="n">CoxPHFitter</span><span class="p">()</span>
@@ -422,23 +412,26 @@ import delimited <span class="s">&quot;ds4ph.capstone.csv&quot;</span>,<span cla
 <span class="n">covariates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">]</span>  <span class="c1"># Replace with the actual column names in your CSV</span>
 
 <span class="c1"># Fit the Cox regression model</span>
-<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="n">time_column</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="n">event_column</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;age + female &#39;</span><span class="p">)</span>
-
+<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="n">time_column</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="n">event_column</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;age + female&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print the summary</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Calculate the number of observations</span>
+<span class="n">n_obs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of observations:&quot;</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">lifelines</span> <span class="kn">import</span> <span class="n">CoxPHFitter</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Import the CSV file</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ds4ph.capstone.csv&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Create Kaplan-Meier survival curves</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">kmf</span> <span class="o">=</span> <span class="n">KaplanMeierFitter</span><span class="p">()</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Import the CSV file</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ds4ph.capstone.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Create Kaplan-Meier survival curves</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">kmf</span> <span class="o">=</span> <span class="n">KaplanMeierFitter</span><span class="p">()</span>
 
 <span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pandas/io/parsers/readers.py:912,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
 <span class="g g-Whitespace">    </span><span class="mi">899</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
@@ -500,49 +493,6 @@ import delimited <span class="s">&quot;ds4ph.capstone.csv&quot;</span>,<span cla
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter observations with missing data</span>
-<span class="c1"># df_missing = df[df.isnull().any(axis=1)]</span>
-
-<span class="c1"># Tabulate summary by survey</span>
-<span class="c1"># summary_table = df_missing.groupby(&#39;year&#39;).size()</span>
-<span class="c1"># print(summary_table)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kaplan-Meier plot</span>
-<span class="n">kmf</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">KaplanMeierFitter</span><span class="p">()</span>
-<span class="n">kmf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">],</span> <span class="n">event_observed</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;died&#39;</span><span class="p">])</span>
-
-<span class="c1"># Complementary cumulative incidence (1 - Kaplan-Meier estimate)</span>
-<span class="n">ci</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">kmf</span><span class="o">.</span><span class="n">survival_function_</span>
-
-<span class="c1"># Plotting</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ci</span><span class="p">[</span><span class="s1">&#39;KM_estimate&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cumulative Incidence Curve&quot;</span><span class="p">)</span>
-
-<span class="c1"># Add the risk table</span>
-<span class="c1"># risk_table = kmf.event_table</span>
-<span class="c1"># plt.table(cellText=risk_table.values, colLabels=risk_table.columns, loc=&#39;center&#39;, cellLoc=&#39;center&#39;)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8057ae2c69a01705ebd9e212d4c5d9f9a1334449e096dfd24bc371653f77cb64.png" src="_images/8057ae2c69a01705ebd9e212d4c5d9f9a1334449e096dfd24bc371653f77cb64.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(73538, 4)
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="app">
 <h1>app<a class="headerlink" href="#app" title="Permalink to this heading">#</a></h1>
@@ -581,7 +531,7 @@ import delimited <span class="s">&quot;ds4ph.capstone.csv&quot;</span>,<span cla
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">165</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">172</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># Train a Cox proportional hazards regression model</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">cph</span> <span class="o">=</span> <span class="n">CoxPHFitter</span><span class="p">()</span>
 <span class="ne">---&gt; </span><span class="mi">17</span> <span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="s1">&#39;years&#39;</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="s1">&#39;died&#39;</span><span class="p">)</span>
@@ -823,7 +773,7 @@ model.pkl, and also saved the beta coefficients as a pickled file called betas.p
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Background</p>
+        <p class="prev-next-title">get(url)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -845,7 +795,7 @@ model.pkl, and also saved the beta coefficients as a pickled file called betas.p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Background</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">StringIO</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#app">app</a></li>
 </ul>
 
