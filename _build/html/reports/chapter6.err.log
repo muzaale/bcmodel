@@ -21,6 +21,7 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 import pandas as pd
 from lifelines import KaplanMeierFitter
 from lifelines import CoxPHFitter
+import matplotlib.pyplot as plt
 
 # Import the CSV file
 data = pd.read_csv('ds4ph.capstone.csv')
@@ -35,8 +36,13 @@ event_column = 'died'  # Replace with the actual column name in your CSV
 # Fit the Kaplan-Meier estimator
 kmf.fit(data[time_column], data[event_column])
 
-# Plot the survival curves
-kmf.plot()
+# Plot the cumulative incidence (1 - KM)
+cumulative_incidence = 1 - kmf.survival_function_
+cumulative_incidence.plot()
+plt.xlabel('Time')
+plt.ylabel('Cumulative Incidence')
+plt.title('Cumulative Incidence Curve')
+plt.show()
 
 # Perform Cox regression
 cph = CoxPHFitter()
@@ -45,23 +51,26 @@ cph = CoxPHFitter()
 covariates = ['age', 'female']  # Replace with the actual column names in your CSV
 
 # Fit the Cox regression model
-cph.fit(data, duration_col=time_column, event_col=event_column, formula='age + female ')
-
+cph.fit(data, duration_col=time_column, event_col=event_column, formula='age + female')
 
 # Print the summary
 print(cph.summary)
+
+# Calculate the number of observations
+n_obs = int(cph._model.weights.sum())
+print("Number of observations:", n_obs)
 
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[1], line 6[0m
-[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mlifelines[39;00m [38;5;28;01mimport[39;00m CoxPHFitter
-[1;32m      5[0m [38;5;66;03m# Import the CSV file[39;00m
-[0;32m----> 6[0m data [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mds4ph.capstone.csv[39;49m[38;5;124;43m'[39;49m[43m)[49m
-[1;32m      8[0m [38;5;66;03m# Create Kaplan-Meier survival curves[39;00m
-[1;32m      9[0m kmf [38;5;241m=[39m KaplanMeierFitter()
+Cell [0;32mIn[1], line 7[0m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      6[0m [38;5;66;03m# Import the CSV file[39;00m
+[0;32m----> 7[0m data [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mds4ph.capstone.csv[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m      9[0m [38;5;66;03m# Create Kaplan-Meier survival curves[39;00m
+[1;32m     10[0m kmf [38;5;241m=[39m KaplanMeierFitter()
 
 File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pandas/io/parsers/readers.py:912[0m, in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
 [1;32m    899[0m kwds_defaults [38;5;241m=[39m _refine_defaults_read(
