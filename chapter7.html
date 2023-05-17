@@ -164,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chapter5.html">content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter6.html">StringIO</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">get(url)</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="chapter8.html">content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter9.html">decode(‘utf-8’)</a></li>
 </ul>
@@ -336,7 +337,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -352,6 +355,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">get(url)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ds4ph-capstone">ds4ph Capstone</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perioperative-and-long-term-risks-following-nephrectomy-in-older-live-kidney-donors">Perioperative and long-term risks following nephrectomy in older live kidney donors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abimereki-muzaale-md-mph-phd-candidate-clinical-investigation">Abimereki Muzaale, MD MPH &amp; PhD Candidate (Clinical Investigation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -374,6 +393,111 @@ document.write(`
 
 </pre></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Abimereki Muzaale</span>
+
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># Load the model and beta coefficients</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;betas.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">betas</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># Define a function to calculate the risk of mortality</span>
+<span class="k">def</span> <span class="nf">calculate_risk</span><span class="p">(</span><span class="n">demographic</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">exam</span><span class="p">,</span> <span class="n">labs</span><span class="p">):</span>
+    <span class="c1"># Combine all input features into a single array</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">demographic</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">exam</span><span class="p">,</span> <span class="n">labs</span><span class="p">])</span>
+    
+    <span class="c1"># Calculate the log hazard ratio using the beta coefficients</span>
+    <span class="n">log_hr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">features</span> <span class="o">*</span> <span class="n">betas</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate the absolute risk using the Cox proportional hazards formula</span>
+    <span class="n">risk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_hr</span><span class="p">)</span> <span class="o">*</span> <span class="n">baseline_risk</span>
+    
+    <span class="k">return</span> <span class="n">risk</span>
+
+<span class="c1"># Define the baseline risk for a healthy individual</span>
+<span class="n">baseline_risk</span> <span class="o">=</span> <span class="mf">0.0028</span> <span class="c1">#from literature &amp; base-case survival</span>
+
+<span class="c1"># Define the input fields for the calculator</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">female</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">])</span>
+<span class="n">racecat</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Race&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Hispanic&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">,</span> <span class="s1">&#39;White&#39;</span><span class="p">])</span>
+<span class="n">dm</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Diabetes&#39;</span><span class="p">)</span>
+<span class="n">htn</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Hypertension&#39;</span><span class="p">)</span>
+<span class="n">acr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;ACR&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">hba1c</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;HbA1c&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">egfr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;eGFR&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sbp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;SBP&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+
+<span class="c1"># Convert categorical variables to one-hot encoding</span>
+<span class="k">if</span> <span class="n">female</span> <span class="o">==</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span>
+    <span class="n">sex_male</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">sex_male</span> <span class="o">=</span> <span class="mi">0</span>
+    
+<span class="k">if</span> <span class="n">racecat</span> <span class="o">==</span> <span class="s1">&#39;Hispanic&#39;</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">race_other</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">elif</span> <span class="n">racecat</span> <span class="o">==</span> <span class="s1">&#39;Other&#39;</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_other</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_other</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Combine all input features into a single array</span>
+<span class="n">demographic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">age</span><span class="p">,</span> <span class="n">sex_male</span><span class="p">,</span> <span class="n">race_hispanic</span><span class="p">,</span> <span class="n">race_other</span><span class="p">,</span> <span class="n">race_white</span><span class="p">])</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">dm</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">htn</span><span class="p">)])</span>
+<span class="n">exam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sbp</span><span class="p">])</span>
+<span class="n">labs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">acr</span><span class="p">,</span><span class="n">hba1c</span><span class="p">,</span> <span class="n">egfr</span><span class="p">])</span>  <span class="c1"># Add any additional lab features here if needed</span>
+
+<span class="c1"># Calculate the risk of mortality using the input features</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">calculate_risk</span><span class="p">(</span><span class="n">demographic</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">exam</span><span class="p">,</span> <span class="n">labs</span><span class="p">)</span>
+
+<span class="c1"># Display the calculated risk</span>
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;30-Year Risk of Mortality:&#39;</span><span class="p">,</span> <span class="n">risk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-17 01:47:19.754 
+  <span class=" -Color -Color-Bold -Color-Bold-Yellow">Warning:</span> to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run /Users/d/Library/Python/3.11/lib/python/site-packages/ipykernel_launcher.py [ARGUMENTS]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ds4ph-capstone">
+<h1>ds4ph Capstone<a class="headerlink" href="#ds4ph-capstone" title="Permalink to this heading">#</a></h1>
+<p>This app represents proof-of-concept for something much <a class="reference external" href="https://grantome.com/grant/NIH/K08-AG065520-01">bigger</a>:</p>
+<section id="perioperative-and-long-term-risks-following-nephrectomy-in-older-live-kidney-donors">
+<h2>Perioperative and long-term risks following nephrectomy in older live kidney donors<a class="headerlink" href="#perioperative-and-long-term-risks-following-nephrectomy-in-older-live-kidney-donors" title="Permalink to this heading">#</a></h2>
+<section id="abimereki-muzaale-md-mph-phd-candidate-clinical-investigation">
+<h3>Abimereki Muzaale, MD MPH &amp; PhD Candidate (Clinical Investigation)<a class="headerlink" href="#abimereki-muzaale-md-mph-phd-candidate-clinical-investigation" title="Permalink to this heading">#</a></h3>
+<p>The number of older adults (aged&lt;55) undergoing live donor nephrectomy has quadrupled over the last two decades and this trend is likely to continue. However, a knowledge gap exists in our understanding of the resiliencies to physical stress in older donors. Beyond age-related vulnerability to surgical stress, this aging population may have significant glomerular senescence, an inadequate adaptive response to the 50% loss of nephron mass and, as such, a very high likelihood of CKD in their lifetime. Approximately 80% of older donors have a postdonation GFR&lt;60 ml/min/1.73m2 and meet the standard definition of CKD.</p>
+<p>As older donors progress towards CKD, they are likely to become frail and, as such, at increased risk of hospitalization. No study has focused on the identification of clinical signatures of resiliency in older persons undergoing live donor nephrectomy. The renal system is directly impacted by nephrectomy and its resiliency may affect the health and well-being of older donors. Provider discussions with these potential donors should focus on the patient’s most important question: <strong>Can I safely donate my kidney??</strong> not the population-level question asked by the 2017 KDIGO guidelines: How many ESRD events in younger donors may be averted by transplanting older donors instead. I propose the following scientific aims:</p>
+<ol class="arabic simple">
+<li><p>To quantify donation-attributable risk of ESRD and mortality in older donors;</p></li>
+<li><p>To describe the prevalence of hospitalizations in older donors vs. older nondonors; and,</p></li>
+<li><p>To <u>implement a risk calculator</u> for ESRD, <strong>mortality</strong> and sentinel hospitalization in older donors. In brief, I’m in the third year of a PhD in Clinical Investigation Program at Bloomberg School. My efforts in this class are culminating in the creation of online risk calculators that inform the conversation between candidates and providers about the propriety of donation. I will deploy several other calculators to reflect my other outcomes of importance to donors other than mortality.</p></li>
+</ol>
+<p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/fMFi8MmzKWtWgmdwEFgTgvwjEjQIT2JkJXNyTRvdSgY60uWGxSN8VPMja6wJafDK.zsVmahonhaML1VoY?startTime=1684297376000">Here</a> is a brief video describing the webApp. Passcode: =67zSM#w</p>
+<p><a class="reference external" href="https://classroom.github.com/a/V-Ayz7c2"><img alt="Review Assignment Due Date" src="https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg" /></a></p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -434,6 +558,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">get(url)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ds4ph-capstone">ds4ph Capstone</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perioperative-and-long-term-risks-following-nephrectomy-in-older-live-kidney-donors">Perioperative and long-term risks following nephrectomy in older live kidney donors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abimereki-muzaale-md-mph-phd-candidate-clinical-investigation">Abimereki Muzaale, MD MPH &amp; PhD Candidate (Clinical Investigation)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
