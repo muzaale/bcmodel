@@ -163,7 +163,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="chapter4.html">tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter5.html">content</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">StringIO</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="chapter7.html">get(url)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="chapter8.html">content</a></li>
@@ -338,9 +337,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -356,16 +353,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">StringIO</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#app">app</a></li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -409,10 +396,10 @@ document.write(`
 <span class="n">cph</span> <span class="o">=</span> <span class="n">CoxPHFitter</span><span class="p">()</span>
 
 <span class="c1"># Define the covariate columns</span>
-<span class="n">covariates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">]</span>  <span class="c1"># Replace with the actual column names in your CSV</span>
+<span class="n">covariates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;racecat&#39;</span><span class="p">,</span> <span class="s1">&#39;dm&#39;</span><span class="p">,</span> <span class="s1">&#39;htn&#39;</span><span class="p">,</span> <span class="s1">&#39;acr&#39;</span><span class="p">,</span> <span class="s1">&#39;hba1c&#39;</span><span class="p">,</span> <span class="s1">&#39;egfr&#39;</span><span class="p">,</span> <span class="s1">&#39;sbp&#39;</span><span class="p">]</span>  <span class="c1"># Replace with the actual column names in your CSV</span>
 
 <span class="c1"># Fit the Cox regression model</span>
-<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="n">time_column</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="n">event_column</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;age + female&#39;</span><span class="p">)</span>
+<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="n">time_column</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="n">event_column</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;age + female + C(racecat) + dm + htn + acr + hba1c + egfr + sbp&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print the summary</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
@@ -424,176 +411,149 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/77526ac9aa548b27b14df2be9f26bc70a85ff23f0115c2e9b6d4fc7000f2c8b9.png" src="_images/77526ac9aa548b27b14df2be9f26bc70a85ff23f0115c2e9b6d4fc7000f2c8b9.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               coef  exp(coef)  se(coef)  coef lower 95%  coef upper 95%   
-covariate                                                                  
-age        0.085383   1.089134  0.000594        0.084220        0.086547  \
-female    -0.355030   0.701153  0.016128       -0.386639       -0.323420   
+<img alt="_images/9a323e3bda2935b0203446e6adf8a3160ddfa73fb2756398b4b91ce0b00606a8.png" src="_images/9a323e3bda2935b0203446e6adf8a3160ddfa73fb2756398b4b91ce0b00606a8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            coef  exp(coef)  se(coef)  coef lower 95%  \
+covariate                                                               
+age                     0.078777   1.081963  0.000771        0.077266   
+female                 -0.301306   0.739851  0.018590       -0.337742   
+C(racecat)[T.Hispanic] -0.344334   0.708692  0.026958       -0.397170   
+C(racecat)[T.Other]    -0.588248   0.555299  0.053390       -0.692891   
+C(racecat)[T.White]    -0.096496   0.908014  0.022179       -0.139966   
+dm                      0.449453   1.567455  0.022127        0.406086   
+htn                     0.146603   1.157894  0.018137        0.111055   
+acr                     0.000006   1.000006  0.000002        0.000003   
+hba1c                  -0.000007   0.999993  0.000008       -0.000023   
+egfr                   -0.004161   0.995848  0.000426       -0.004996   
+sbp                     0.001695   1.001697  0.000189        0.001325   
 
-           exp(coef) lower 95%  exp(coef) upper 95%  cmp to           z   
-covariate                                                                 
-age                   1.087868             1.090402     0.0  143.829280  \
-female                0.679336             0.723670     0.0  -22.013754   
+                        coef upper 95%  exp(coef) lower 95%  \
+covariate                                                     
+age                           0.080288             1.080329   
+female                       -0.264871             0.713379   
+C(racecat)[T.Hispanic]       -0.291497             0.672220   
+C(racecat)[T.Other]          -0.483606             0.500128   
+C(racecat)[T.White]          -0.053026             0.869388   
+dm                            0.492821             1.500931   
+htn                           0.182151             1.117456   
+acr                           0.000010             1.000003   
+hba1c                         0.000008             0.999977   
+egfr                         -0.003325             0.995016   
+sbp                           0.002066             1.001326   
 
-                       p    -log2(p)  
-covariate                             
-age         0.000000e+00         inf  
-female     2.126362e-107  354.357919  
-Number of observations: 73538
+                        exp(coef) upper 95%  cmp to           z             p  \
+covariate                                                                       
+age                                1.083599     0.0  102.186342  0.000000e+00   
+female                             0.767305     0.0  -16.208079  4.421775e-59   
+C(racecat)[T.Hispanic]             0.747144     0.0  -12.773099  2.317421e-37   
+C(racecat)[T.Other]                0.616556     0.0  -11.017953  3.130990e-28   
+C(racecat)[T.White]                0.948356     0.0   -4.350776  1.356564e-05   
+dm                                 1.636927     0.0   20.312733  9.922658e-92   
+htn                                1.199796     0.0    8.083003  6.319122e-16   
+acr                                1.000010     0.0    3.602481  3.151943e-04   
+hba1c                              1.000008     0.0   -0.919880  3.576357e-01   
+egfr                               0.996681     0.0   -9.757646  1.710805e-22   
+sbp                                1.002068     0.0    8.968621  3.002494e-19   
+
+                          -log2(p)  
+covariate                           
+age                            inf  
+female                  193.849132  
+C(racecat)[T.Hispanic]  121.698819  
+C(racecat)[T.Other]      91.367368  
+C(racecat)[T.White]      16.169683  
+dm                      302.306658  
+htn                      50.491125  
+acr                      11.631471  
+hba1c                     1.483437  
+egfr                     72.307743  
+sbp                      61.530472  
+Number of observations: 64899
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="app">
-<h1>app<a class="headerlink" href="#app" title="Permalink to this heading">#</a></h1>
+<p>Here is a basic implementation of a Streamlit app called <a class="reference external" href="http://capstone.py">capstone.py</a> that produces a calculator to estimate the 30-year risk of mortality in healthy living kidney donor candidates:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load and preprocess the NHANES dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">lifelines</span> <span class="kn">import</span> <span class="n">CoxPHFitter</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
 
-<span class="c1"># Perform necessary preprocessing steps on the dataset</span>
-<span class="c1"># ...</span>
+<span class="c1"># Import the CSV file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;~/dropbox/0g.κοσμογονία,γ/2.pantheon/ds4ph.capstone.csv&#39;</span><span class="p">)</span>
 
-<span class="c1"># Split the dataset into training and testing sets</span>
-
-<span class="c1"># Split the dataset into features (X) and the target variable (y)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">]]</span>
-
-<span class="c1"># X = df[[&#39;age&#39;, &#39;sex&#39;, &#39;race&#39;, &#39;diabetes&#39;, &#39;hypertension&#39;, &#39;kidney_disease&#39;, &#39;smoking&#39;, &#39;medication&#39;,</span>
-<span class="c1"># &#39;bmi&#39;, &#39;sbp&#39;, &#39;creatinine&#39;, &#39;albumin_creatinine_ratio&#39;, &#39;egfr&#39;, &#39;hba1c&#39;]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;years&#39;</span><span class="p">]</span>
-
-<span class="c1"># Train a Cox proportional hazards regression model</span>
+<span class="c1"># Perform Cox regression</span>
 <span class="n">cph</span> <span class="o">=</span> <span class="n">CoxPHFitter</span><span class="p">()</span>
-<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="s1">&#39;years&#39;</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="s1">&#39;died&#39;</span><span class="p">)</span>
 
-<span class="c1"># Extract the beta coefficients</span>
-<span class="n">betas</span> <span class="o">=</span> <span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># Define the covariate columns</span>
+<span class="n">covariates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;racecat&#39;</span><span class="p">,</span> <span class="s1">&#39;dm&#39;</span><span class="p">,</span> <span class="s1">&#39;htn&#39;</span><span class="p">,</span> <span class="s1">&#39;acr&#39;</span><span class="p">,</span> <span class="s1">&#39;hba1c&#39;</span><span class="p">,</span> <span class="s1">&#39;egfr&#39;</span><span class="p">,</span> <span class="s1">&#39;sbp&#39;</span><span class="p">]</span>
+
+<span class="c1"># Fit the Cox regression model</span>
+<span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="s1">&#39;years&#39;</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="s1">&#39;died&#39;</span><span class="p">,</span> <span class="n">formula</span><span class="o">=</span><span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">covariates</span><span class="p">))</span>
 
 <span class="c1"># Save the trained model and beta coefficients</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cph</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;betas.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">betas</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># Print the summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Calculate the number of observations</span>
+<span class="n">n_obs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cph</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of observations:&quot;</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># Train a Cox proportional hazards regression model</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">cph</span> <span class="o">=</span> <span class="n">CoxPHFitter</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">17</span> <span class="n">cph</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">duration_col</span><span class="o">=</span><span class="s1">&#39;years&#39;</span><span class="p">,</span> <span class="n">event_col</span><span class="o">=</span><span class="s1">&#39;died&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># Extract the beta coefficients</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">betas</span> <span class="o">=</span> <span class="n">cph</span><span class="o">.</span><span class="n">summary</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                         coef  exp(coef)  se(coef)  coef lower 95%  \
+covariate                                                            
+age                  0.078777   1.081963  0.000771        0.077266   
+female              -0.301306   0.739851  0.018590       -0.337742   
+racecat[T.Hispanic] -0.344334   0.708692  0.026958       -0.397170   
+racecat[T.Other]    -0.588248   0.555299  0.053390       -0.692891   
+racecat[T.White]    -0.096496   0.908014  0.022179       -0.139966   
+dm                   0.449453   1.567455  0.022127        0.406086   
+htn                  0.146603   1.157894  0.018137        0.111055   
+acr                  0.000006   1.000006  0.000002        0.000003   
+hba1c               -0.000007   0.999993  0.000008       -0.000023   
+egfr                -0.004161   0.995848  0.000426       -0.004996   
+sbp                  0.001695   1.001697  0.000189        0.001325   
 
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/utils/__init__.py:56,</span> in <span class="ni">CensoringType.right_censoring.&lt;locals&gt;.f</span><span class="nt">(model, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span>     <span class="bp">cls</span><span class="o">.</span><span class="n">set_censoring_type</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                     coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%  \
+covariate                                                                       
+age                        0.080288             1.080329             1.083599   
+female                    -0.264871             0.713379             0.767305   
+racecat[T.Hispanic]       -0.291497             0.672220             0.747144   
+racecat[T.Other]          -0.483606             0.500128             0.616556   
+racecat[T.White]          -0.053026             0.869388             0.948356   
+dm                         0.492821             1.500931             1.636927   
+htn                        0.182151             1.117456             1.199796   
+acr                        0.000010             1.000003             1.000010   
+hba1c                      0.000008             0.999977             1.000008   
+egfr                      -0.003325             0.995016             0.996681   
+sbp                        0.002066             1.001326             1.002068   
 
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/fitters/coxph_fitter.py:290,</span> in <span class="ni">CoxPHFitter.fit</span><span class="nt">(self, df, duration_col, event_col, show_progress, initial_point, strata, weights_col, cluster_col, robust, batch_mode, timeline, formula, entry_col, fit_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span><span class="sd"> Fit the Cox proportional hazard model to a right-censored dataset. Alias of `fit_right_censoring`.</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">288</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="bp">self</span><span class="o">.</span><span class="n">strata</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">_to_list_or_singleton</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="n">strata</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strata</span><span class="p">))</span>
-<span class="ne">--&gt; </span><span class="mi">290</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_model</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="n">df</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">292</span>     <span class="n">duration_col</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>     <span class="n">event_col</span><span class="o">=</span><span class="n">event_col</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>     <span class="n">initial_point</span><span class="o">=</span><span class="n">initial_point</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="n">strata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strata</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="n">weights_col</span><span class="o">=</span><span class="n">weights_col</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="n">cluster_col</span><span class="o">=</span><span class="n">cluster_col</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="n">robust</span><span class="o">=</span><span class="n">robust</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>     <span class="n">batch_mode</span><span class="o">=</span><span class="n">batch_mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="n">timeline</span><span class="o">=</span><span class="n">timeline</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>     <span class="n">entry_col</span><span class="o">=</span><span class="n">entry_col</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="n">fit_options</span><span class="o">=</span><span class="n">fit_options</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span> <span class="k">return</span> <span class="bp">self</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/fitters/coxph_fitter.py:610,</span> in <span class="ni">CoxPHFitter._fit_model</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">608</span> <span class="k">def</span> <span class="nf">_fit_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">609</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_estimation_method</span> <span class="o">==</span> <span class="s2">&quot;breslow&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">610</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_model_breslow</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">611</span>     <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_estimation_method</span> <span class="o">==</span> <span class="s2">&quot;spline&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">612</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_model_spline</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/fitters/coxph_fitter.py:623,</span> in <span class="ni">CoxPHFitter._fit_model_breslow</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="n">model</span> <span class="o">=</span> <span class="n">SemiParametricPHFitter</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">620</span>     <span class="n">penalizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">penalizer</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">l1_ratio</span><span class="p">,</span> <span class="n">strata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strata</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_label</span>
-<span class="g g-Whitespace">    </span><span class="mi">621</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">CensoringType</span><span class="o">.</span><span class="n">is_right_censoring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">623</span>     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">624</span>     <span class="k">return</span> <span class="n">model</span>
-<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/utils/__init__.py:56,</span> in <span class="ni">CensoringType.right_censoring.&lt;locals&gt;.f</span><span class="nt">(model, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span>     <span class="bp">cls</span><span class="o">.</span><span class="n">set_censoring_type</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/fitters/coxph_fitter.py:1229,</span> in <span class="ni">SemiParametricPHFitter.fit</span><span class="nt">(self, df, duration_col, event_col, show_progress, initial_point, strata, weights_col, cluster_col, robust, batch_mode, timeline, formula, entry_col, fit_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1226</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span>
-<span class="g g-Whitespace">   </span><span class="mi">1227</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_col</span> <span class="o">=</span> <span class="n">entry_col</span>
-<span class="ne">-&gt; </span><span class="mi">1229</span> <span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">entries</span><span class="p">,</span> <span class="n">original_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1231</span> <span class="bp">self</span><span class="o">.</span><span class="n">durations</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1232</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_observed</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/lifelines/fitters/coxph_fitter.py:1306,</span> in <span class="ni">SemiParametricPHFitter._preprocess_dataframe</span><span class="nt">(self, df)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span>     <span class="n">sort_by</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">duration_col</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_col</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_col</span> <span class="k">else</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">duration_col</span><span class="p">]</span>
-<span class="ne">-&gt; </span><span class="mi">1306</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">sort_by</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1307</span>     <span class="n">original_index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1309</span> <span class="c1"># Extract time, event and metadata</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pandas/core/frame.py:6750,</span> in <span class="ni">DataFrame.sort_values</span><span class="nt">(self, by, axis, ascending, inplace, kind, na_position, ignore_index, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6745</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">6746</span>         <span class="sa">f</span><span class="s2">&quot;Length of ascending (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ascending</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>  <span class="c1"># type: ignore[arg-type]</span>
-<span class="g g-Whitespace">   </span><span class="mi">6747</span>         <span class="sa">f</span><span class="s2">&quot; != length of by (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">6748</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6749</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">by</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">6750</span>     <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_label_or_level_values</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">by</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">6752</span>     <span class="c1"># need to rewrap columns in Series to apply key function</span>
-<span class="g g-Whitespace">   </span><span class="mi">6753</span>     <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">6754</span>         <span class="c1"># error: List comprehension has incompatible type List[Series];</span>
-<span class="g g-Whitespace">   </span><span class="mi">6755</span>         <span class="c1"># expected List[ndarray]</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pandas/core/frame.py:6750,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6745</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">6746</span>         <span class="sa">f</span><span class="s2">&quot;Length of ascending (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ascending</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>  <span class="c1"># type: ignore[arg-type]</span>
-<span class="g g-Whitespace">   </span><span class="mi">6747</span>         <span class="sa">f</span><span class="s2">&quot; != length of by (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">6748</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6749</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">by</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">6750</span>     <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_label_or_level_values</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">by</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">6752</span>     <span class="c1"># need to rewrap columns in Series to apply key function</span>
-<span class="g g-Whitespace">   </span><span class="mi">6753</span>     <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">6754</span>         <span class="c1"># error: List comprehension has incompatible type List[Series];</span>
-<span class="g g-Whitespace">   </span><span class="mi">6755</span>         <span class="c1"># expected List[ndarray]</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pandas/core/generic.py:1778,</span> in <span class="ni">NDFrame._get_label_or_level_values</span><span class="nt">(self, key, axis)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1776</span>     <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">_values</span>
-<span class="g g-Whitespace">   </span><span class="mi">1777</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1778</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1780</span> <span class="c1"># Check for duplicates</span>
-<span class="g g-Whitespace">   </span><span class="mi">1781</span> <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="ne">KeyError</span>: &#39;years&#39;
+                     cmp to           z             p    -log2(p)  
+covariate                                                          
+age                     0.0  102.186342  0.000000e+00         inf  
+female                  0.0  -16.208079  4.421775e-59  193.849132  
+racecat[T.Hispanic]     0.0  -12.773099  2.317421e-37  121.698819  
+racecat[T.Other]        0.0  -11.017953  3.130990e-28   91.367368  
+racecat[T.White]        0.0   -4.350776  1.356564e-05   16.169683  
+dm                      0.0   20.312733  9.922658e-92  302.306658  
+htn                     0.0    8.083003  6.319122e-16   50.491125  
+acr                     0.0    3.602481  3.151943e-04   11.631471  
+hba1c                   0.0   -0.919880  3.576357e-01    1.483437  
+egfr                    0.0   -9.757646  1.710805e-22   72.307743  
+sbp                     0.0    8.968621  3.002494e-19   61.530472  
+Number of observations: 64899
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here is a basic implementation of a Streamlit app called <a class="reference external" href="http://capstone.py">capstone.py</a> that produces a calculator to estimate the 30-year risk of mortality in healthy living kidney donor candidates:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
@@ -625,45 +585,40 @@ Number of observations: 73538
 <span class="n">baseline_risk</span> <span class="o">=</span> <span class="mf">0.0028</span>
 
 <span class="c1"># Define the input fields for the calculator</span>
-<span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">sex</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">])</span>
-<span class="n">race</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Race&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="s1">&#39;Black&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">])</span>
-<span class="n">diabetes</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Diabetes&#39;</span><span class="p">)</span>
-<span class="n">hypertension</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Hypertension&#39;</span><span class="p">)</span>
-<span class="n">kidney_disease</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Kidney Disease&#39;</span><span class="p">)</span>
-<span class="n">smoking</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Smoking&#39;</span><span class="p">)</span>
-<span class="n">medication</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Taking Medication&#39;</span><span class="p">)</span>
-<span class="n">bmi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;BMI&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">sbp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;SBP&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
-<span class="n">creatinine</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;Serum Creatinine&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="n">albumin_creatinine_ratio</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;Urine Albumin-to-Creatinine Ratio&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="n">egfr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;eGFR&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">female</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">])</span>
+<span class="n">racecat</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s1">&#39;Race&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Hispanic&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">,</span> <span class="s1">&#39;White&#39;</span><span class="p">])</span>
+<span class="n">dm</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Diabetes&#39;</span><span class="p">)</span>
+<span class="n">htn</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="s1">&#39;Hypertension&#39;</span><span class="p">)</span>
+<span class="n">acr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;ACR&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 <span class="n">hba1c</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;HbA1c&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">egfr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;eGFR&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sbp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;SBP&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
 
 <span class="c1"># Convert categorical variables to one-hot encoding</span>
-<span class="k">if</span> <span class="n">sex</span> <span class="o">==</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">female</span> <span class="o">==</span> <span class="s1">&#39;Male&#39;</span><span class="p">:</span>
     <span class="n">sex_male</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">sex_male</span> <span class="o">=</span> <span class="mi">0</span>
     
-<span class="k">if</span> <span class="n">race</span> <span class="o">==</span> <span class="s1">&#39;White&#39;</span><span class="p">:</span>
-    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">race_black</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">if</span> <span class="n">racecat</span> <span class="o">==</span> <span class="s1">&#39;Hispanic&#39;</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">race_other</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">elif</span> <span class="n">race</span> <span class="o">==</span> <span class="s1">&#39;Black&#39;</span><span class="p">:</span>
     <span class="n">race_white</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">race_black</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">race_other</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">race_black</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">elif</span> <span class="n">racecat</span> <span class="o">==</span> <span class="s1">&#39;Other&#39;</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">race_other</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">race_hispanic</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_other</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">race_white</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1"># Combine all input features into a single array</span>
-<span class="n">demographic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">age</span><span class="p">,</span> <span class="n">sex_male</span><span class="p">,</span> <span class="n">race_white</span><span class="p">,</span> <span class="n">race_black</span><span class="p">,</span> <span class="n">race_other</span><span class="p">])</span>
-<span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">diabetes</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">hypertension</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">kidney_disease</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">smoking</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">medication</span><span class="p">)])</span>
-<span class="n">exam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bmi</span><span class="p">,</span> <span class="n">sbp</span><span class="p">])</span>
-<span class="n">labs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">creatinine</span><span class="p">,</span> <span class="n">albumin_creatinine_ratio</span><span class="p">,</span> <span class="n">egfr</span><span class="p">,</span> <span class="n">hba1c</span><span class="p">])</span>
+<span class="n">demographic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">age</span><span class="p">,</span> <span class="n">sex_male</span><span class="p">,</span> <span class="n">race_hispanic</span><span class="p">,</span> <span class="n">race_other</span><span class="p">,</span> <span class="n">race_white</span><span class="p">])</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">dm</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">htn</span><span class="p">)])</span>
+<span class="n">exam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sbp</span><span class="p">])</span>
+<span class="n">labs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">acr</span><span class="p">,</span><span class="n">hba1c</span><span class="p">,</span> <span class="n">egfr</span><span class="p">])</span>  <span class="c1"># Add any additional lab features here if needed</span>
 
 <span class="c1"># Calculate the risk of mortality using the input features</span>
 <span class="n">risk</span> <span class="o">=</span> <span class="n">calculate_risk</span><span class="p">(</span><span class="n">demographic</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">exam</span><span class="p">,</span> <span class="n">labs</span><span class="p">)</span>
@@ -673,10 +628,30 @@ Number of observations: 73538
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-16 23:42:55.609 
+  <span class=" -Color -Color-Bold -Color-Bold-Yellow">Warning:</span> to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run /Users/d/Library/Python/3.11/lib/python/site-packages/ipykernel_launcher.py [ARGUMENTS]
+</pre></div>
 </div>
-<p>Note that the implementation assumes that you have already trained a Cox proportional hazards regression model using the NHANES data and saved it as a pickled file called
-model.pkl, and also saved the beta coefficients as a pickled file called betas.pkl. You will need to replace the file names and paths in the with open() statements to match your specific implementation.</p>
-<p>Also, please note that this is a basic implementation and may require additional modifications to meet your specific requirements.</p>
+</div>
+</div>
+<p>Install the required dependencies: Make sure you have all the necessary dependencies installed. You can use the pip package manager to install them. In your terminal or command prompt, navigate to your project directory and run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">streamlit</span> <span class="n">pandas</span> <span class="n">numpy</span> <span class="n">lifelines</span> <span class="n">matplotlib</span>
+</pre></div>
+</div>
+<p>Save your Streamlit app code: Save your Streamlit app code in a Python file with a .py extension. Let’s say you save it as <a class="reference external" href="http://app.py">app.py</a>.
+Run the app: In your terminal or command prompt, navigate to your project directory and run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">streamlit</span> <span class="n">run</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
+
+</pre></div>
+</div>
+<p>Access the app: After running the command, you will see some output in the terminal indicating that the Streamlit app is running. It will provide a local URL (usually <a class="reference external" href="http://localhost:8501">http://localhost:8501</a>) where you can access your app in your web browser.
+You can open your web browser and enter the provided URL to view and interact with your Streamlit app.
+Any changes you make to the <a class="reference external" href="http://app.py">app.py</a> file will be automatically detected by Streamlit, and the app will be refreshed in real-time.
+Feel free to iterate and make changes to your app locally until you’re satisfied with its functionality and appearance.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -737,22 +712,6 @@ model.pkl, and also saved the beta coefficients as a pickled file called betas.p
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">StringIO</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#app">app</a></li>
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
